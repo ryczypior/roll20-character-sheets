@@ -74,7 +74,7 @@ hr{
     margin: 10px 0;
 }
 
-.sheet-bar-heading-big, .sheet-rolltemplate-slowianie h1 {
+.sheet-bar-heading-big {
     position: relative;
     height: 47px;
     color: #ffffff;
@@ -196,4 +196,38 @@ textarea{
 }
 
 
+.sheet-rolltemplate-slowianie{
+    h1{
+        position: relative;
+        height: 25px;
+        color: #ffffff;
+        box-sizing: border-box;
+        padding: 5px 20px;
+        text-align: center;
+        font-size: 16px;
+        margin: 16px 50px;
+        background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-center-small.png") repeat-x center center #231f20;
 
+        &:before {
+            content: " ";
+            display: block;
+            position: absolute;
+            left: -55px;
+            top: -5px;
+            width: 59px;
+            height: 57px;
+            background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-left-small.png") no-repeat center center/cover;
+        }
+
+        &:after {
+            content: " ";
+            display: block;
+            position: absolute;
+            right: -55px;
+            top: -5px;
+            width: 59px;
+            height: 57px;
+            background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-right-small.png") no-repeat center center/cover;
+        }
+    }
+}

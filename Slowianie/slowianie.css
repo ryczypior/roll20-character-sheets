@@ -64,7 +64,7 @@ hr {
   border-bottom: solid 1px #dddddd;
   margin: 10px 0; }
 
-.sheet-bar-heading-big, .sheet-rolltemplate-slowianie h1 {
+.sheet-bar-heading-big {
   position: relative;
   height: 47px;
   color: #ffffff;
@@ -74,7 +74,7 @@ hr {
   font-size: 20px;
   margin: 16px 50px;
   background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-center.png") repeat-x center center #231f20; }
-  .sheet-bar-heading-big:before, .sheet-rolltemplate-slowianie h1:before {
+  .sheet-bar-heading-big:before {
     content: " ";
     display: block;
     position: absolute;
@@ -83,7 +83,7 @@ hr {
     width: 59px;
     height: 57px;
     background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-left.png") no-repeat center center/cover; }
-  .sheet-bar-heading-big:after, .sheet-rolltemplate-slowianie h1:after {
+  .sheet-bar-heading-big:after {
     content: " ";
     display: block;
     position: absolute;
@@ -2721,3 +2721,32 @@ textarea {
     .sheet .ml-xl-auto,
     .sheet .mx-xl-auto {
       margin-left: auto !important; } }
+
+.sheet-rolltemplate-slowianie h1 {
+  position: relative;
+  height: 25px;
+  color: #ffffff;
+  box-sizing: border-box;
+  padding: 5px 20px;
+  text-align: center;
+  font-size: 16px;
+  margin: 16px 50px;
+  background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-center-small.png") repeat-x center center #231f20; }
+  .sheet-rolltemplate-slowianie h1:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: -55px;
+    top: -5px;
+    width: 59px;
+    height: 57px;
+    background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-left-small.png") no-repeat center center/cover; }
+  .sheet-rolltemplate-slowianie h1:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    right: -55px;
+    top: -5px;
+    width: 59px;
+    height: 57px;
+    background: url("https://raw.githubusercontent.com/ryczypior/roll20-character-sheets/slowianie-character-sheet/Slowianie/assets/glyph-right-small.png") no-repeat center center/cover; }
