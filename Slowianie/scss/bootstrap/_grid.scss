@@ -5,13 +5,16 @@
 @if $enable-grid-classes {
   // Single container class with breakpoint max-widths
   .slowianie-container,
+  .sheet-container,
   // 100% wide container at all breakpoints
+  .sheet-container-fluid
   .slowianie-container-fluid {
     @include make-container();
   }
 
   // Responsive containers that are 100% wide until a breakpoint
   @each $breakpoint, $container-max-width in $container-max-widths {
+    .sheet-container-#{$breakpoint},
     .slowianie-container-#{$breakpoint} {
       @extend .slowianie-container-fluid;
     }
@@ -26,6 +29,7 @@
 
       @each $name, $width in $grid-breakpoints {
         @if ($extend-breakpoint) {
+          .sheet-container#{breakpoint-infix($name, $grid-breakpoints)},
           .slowianie-container#{breakpoint-infix($name, $grid-breakpoints)} {
             @extend %responsive-container-#{$breakpoint};
           }
@@ -46,18 +50,20 @@
 // Rows contain your columns.
 
 @if $enable-grid-classes {
-  .slowianie-row {
+  .slowianie-row, .sheet-row {
     @include make-row();
   }
 
   // Remove the negative margin from default .slowianie-row, then the horizontal padding
   // from all immediate children columns (to prevent runaway style inheritance).
-  .no-gutters {
+  .no-gutters, .sheet-no-gutters {
     margin-right: 0;
     margin-left: 0;
 
     > .col,
-    > [class*="col-"] {
+    > .sheet-col,
+    > [class*="col-"],
+    > [class*="sheet-col-"] {
       padding-right: 0;
       padding-left: 0;
     }

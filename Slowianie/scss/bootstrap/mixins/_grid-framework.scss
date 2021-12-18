@@ -18,12 +18,15 @@
     @if $columns > 0 {
       // Allow columns to stretch full width below their breakpoints
       @for $i from 1 through $columns {
+        .sheet-col#{$infix}-#{$i},
         .col#{$infix}-#{$i} {
           @extend %grid-column;
         }
       }
     }
 
+    .sheet-col#{$infix},
+    .sheet-col#{$infix}-auto,
     .col#{$infix},
     .col#{$infix}-auto {
       @extend %grid-column;
@@ -31,6 +34,7 @@
 
     @include media-breakpoint-up($breakpoint, $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .sheet-col#{$infix},
       .col#{$infix} {
         flex-basis: 0;
         flex-grow: 1;
@@ -39,18 +43,21 @@
 
       @if $grid-row-columns > 0 {
         @for $i from 1 through $grid-row-columns {
+          .sheet-row-cols#{$infix}-#{$i},
           .slowianie-row-cols#{$infix}-#{$i} {
             @include row-cols($i);
           }
         }
       }
 
+      .sheet-col#{$infix}-auto,
       .col#{$infix}-auto {
         @include make-col-auto();
       }
 
       @if $columns > 0 {
         @for $i from 1 through $columns {
+          .sheet-col#{$infix}-#{$i},
           .col#{$infix}-#{$i} {
             @include make-col($i, $columns);
           }

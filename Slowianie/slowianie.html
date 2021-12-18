@@ -1411,17 +1411,17 @@
                         <div class="col-9">
                             <select name="attr_BronReczna1Typ">
                                 <option value="0">-</option>
-                                <option value="@{Piesci}" data-i18n="Fists (Str)">Fists (Str)</option>
-                                <option value="@{PiesciZr}" data-i18n="Fists (Dex)">Fists (Dex)</option>
-                                <option value="@{BronJednoreczna}" data-i18n="One-handed (Dex)">One-handed (Dex)</option>
-                                <option value="@{BronDrzewcowa}" data-i18n="Polearm (Dex)">Polearm (Dex)</option>
-                                <option value="@{BronCiezka}" data-i18n="Heavy Weapon (Str)">Heavy Weapon (Str)</option>
+                                <option value="@{PiesciAttr}" data-i18n="Fists (Str)">Fists (Str)</option>
+                                <option value="@{PiesciZrAttr}" data-i18n="Fists (Dex)">Fists (Dex)</option>
+                                <option value="@{BronJednorecznaAttr}" data-i18n="One-handed (Dex)">One-handed (Dex)</option>
+                                <option value="@{BronDrzewcowaAttr}" data-i18n="Polearm (Dex)">Polearm (Dex)</option>
+                                <option value="@{BronCiezkaAttr}" data-i18n="Heavy Weapon (Str)">Heavy Weapon (Str)</option>
                             </select>
                         </div>
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 text-center">
-                            <button type="roll" class="sheet-roll btn" name="roll_BronReczna1Atak" value="&amp;{template:default}{{name=@{character_name}}} {{@{AtakTxt}=[[@{CharacterState}+@{Zrecznosc}+@{BronReczna1Typ}+?{Mod @{AtakTxt}|0}]]}}{{@{ObrazeniaTxt}=[[@{BronReczna1KO}+@{Krzepa}+?{Mod @{ObrazeniaTxt}|0}]]}}">
+                            <button type="roll" class="sheet-roll btn" name="roll_BronReczna1Atak" value="&amp;{template:default}{{name=@{character_name}}} {{@{AtakTxt}=[[@{CharacterState}+@{BronReczna1Typ}+?{Mod @{AtakTxt}|0}]]}}{{@{ObrazeniaTxt}=[[@{BronReczna1KO}+@{Krzepa}+?{Mod @{ObrazeniaTxt}|0}]]}}">
                                 <span data-i18n="weapon-attack-button">Attack</span>
                             </button>
                             <button type="roll" class="sheet-roll btn" name="roll_BronReczna1Parowanie" value="&amp;{template:default}{{name=@{character_name}}} {{@{ParowanieTxt}=[[@{CharacterState}+@{Zrecznosc}+@{BronReczna1Typ}+?{Mod|0}]]}}{{@{UnikTxt}=[[2d6+@{Zrecznosc}+?{Mod|0}]]}}">
@@ -1463,11 +1463,11 @@
                         <div class="col-9">
                             <select name="attr_BronReczna2Typ">
                                 <option value="0">-</option>
-                                <option value="@{Piesci}" data-i18n="Fists (Str)">Fists (Str)</option>
-                                <option value="@{PiesciZr}" data-i18n="Fists (Dex)">Fists (Dex)</option>
-                                <option value="@{BronJednoreczna}" data-i18n="One-handed (Dex)">One-handed (Dex)</option>
-                                <option value="@{BronDrzewcowa}" data-i18n="Polearm (Dex)">Polearm (Dex)</option>
-                                <option value="@{BronCiezka}" data-i18n="Heavy Weapon (Str)">Heavy Weapon (Str)</option>
+                                <option value="@{PiesciAttr}" data-i18n="Fists (Str)">Fists (Str)</option>
+                                <option value="@{PiesciZrAttr}" data-i18n="Fists (Dex)">Fists (Dex)</option>
+                                <option value="@{BronJednorecznaAttr}" data-i18n="One-handed (Dex)">One-handed (Dex)</option>
+                                <option value="@{BronDrzewcowaAttr}" data-i18n="Polearm (Dex)">Polearm (Dex)</option>
+                                <option value="@{BronCiezkaAttr}" data-i18n="Heavy Weapon (Str)">Heavy Weapon (Str)</option>
                             </select>
                         </div>
                     </div>
@@ -1608,7 +1608,7 @@
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 text-center">
-                            <button type="roll" class="sheet-roll btn" name="roll_BronDystansowaAtak" value="&amp;{template:default}{{name=@{character_name}}} {{@{AtakTxt}=[[@{CharacterState}+@{Zrecznosc}+@{Luki}+?{Mod @{AtakTxt}|0}]]}}{{@{ObrazeniaTxt}=[[@{BronDystansowaKO}+@{BronDystansowaPocisk}+?{Mod @{ObrazeniaTxt}|0}]]}}">
+                            <button type="roll" class="sheet-roll btn" name="roll_BronDystansowaAtak" value="&amp;{template:slowianie}{{title=@{BronDystansowa}}} {{character=@{character_name}}} {{roll1Txt=@{AtakTxt}}} {{roll1=[[@{CharacterState}]]}} {{rollMod1=[[@{Zrecznosc}+@{Luki}+?{Mod @{AtakTxt}|0}]]}} {{roll2Txt=@{ObrazeniaTxt}}} {{roll2=[[@{BronDystansowaKO}]]}} {{rollMod2=[[@{BronDystansowaPocisk}+?{Mod @{ObrazeniaTxt}|0}]]}}">
                                 <span data-i18n="weapon-attack-button">Attack</span>
                             </button>
                         </div>
@@ -1735,6 +1735,7 @@
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 pb-1">
+                            <input type="checkbox" name="attr_god_luck_checked" value="1">
                             <strong data-i18n="god-luck-label">Luck:</strong>
                         </div>
                         <div class="col-12">
@@ -1743,6 +1744,7 @@
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 pb-1">
+                            <input type="checkbox" name="attr_god_destiny_checked" value="1">
                             <strong data-i18n="god-destiny-label">Destiny:</strong>
                         </div>
                         <div class="col-12">
@@ -1751,6 +1753,7 @@
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 pb-1">
+                            <input type="checkbox" name="attr_god_war_checked" value="1">
                             <strong data-i18n="god-war-label">War:</strong>
                         </div>
                         <div class="col-12">
@@ -1759,6 +1762,7 @@
                     </div>
                     <div class="slowianie-row no-gutters row-titles">
                         <div class="col-12 pb-1">
+                            <input type="checkbox" name="attr_god_grace_checked" value="1">
                             <strong data-i18n="god-grace-label">Grace:</strong>
                         </div>
                         <div class="col-12">
@@ -2173,12 +2177,27 @@
         </div>
     </div>
 </div>
+<rolltemplate class="sheet-rolltemplate-slowianie">
+    <div class="sheet-container">
+        <div class="sheet-row">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="sheet-row">
+            <h2>{{character}}</h2>
+        </div>
+        <div class="sheet-row">
+            <div class="sheet-col-8">{{roll1Txt}}</div>
+            <div class="sheet-col-4">{{roll1}} + {{rollMod1}} = {{roll1 + rollMod1}}</div>
+        </div>
+    </div>
+</rolltemplate>
 <script type="text/worker">
 on("sheet:opened", function(eventInfo){
     setAttrs({
         KrzepaTxt: getTranslationByKey("Strength (Str)"),
         ZrecznoscTxt: getTranslationByKey("Dexterity (Dex)"),
         UmyslTxt: getTranslationByKey("Intelligence (Int)"),
+        DuchTxt: getTranslationByKey("Wisdom (Wis)"),
         ZmyslyTxt: getTranslationByKey("Senses (Sen)"),
         BronCiezkaTxt: getTranslationByKey("Heavy Weapon (Str)"),
         BronDrzewcowaTxt: getTranslationByKey("Polearm (Dex)"),
