@@ -1,5 +1,14 @@
 Change Log
 ==============================================
+**2021-06-07 ** v.35 Chuz (James Culp)
+	Added Matrix AR and Matrix DR to Host sheet
+**2021-05-25 ** v.34 Chuz (James Culp)
+	Bugfix - Changed HTML top display the nuyen symbol instead of translations as the character was breaking the translation stuff
+**2021-05-17 ** v.33 Chuz (James Culp)
+	Bugfix - PC->Grenades launched grenades didn't work properly
+	Bugfix - Nuyen symbol keeps disappearing, another attempt to lock it in
+	Added mouseover text to Rolls->Matrix Actions to identify skill and attribute for each.
+	Updated NPC-Spells to follow the same format as PC-Spells, to include using the same roll button format.
 **2021-05-10 ** v.32 Chuz (James Culp)
 	Bugfix - Added sheetworker call on sheet load to fix incorrectly calculated soak value for the Core->Soak Damage button
 	Changed Rolls->Jack Out from text to a roll button so unfortunate deckers can escape link-lock.
