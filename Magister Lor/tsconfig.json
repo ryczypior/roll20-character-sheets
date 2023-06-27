@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "system",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outFile": "src/magister-lor.js",
+    "sourceMap": false,
+    "lib": [
+      "ES2017",
+      "dom"
+    ]
+  },
+  "include": [
+    "src/ts/**/*"
+  ]
+}
