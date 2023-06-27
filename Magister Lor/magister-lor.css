@@ -1,18 +1,1 @@
-/* Error: expected ")".
- *   ,
- * 3 |         background: url(;
- *   |                         ^
- *   '
- *   src/scss/character.scss 3:25  @import
- *   src/magister-lor.scss 1:9     root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: expected ")".\a   \2577 \a 3 \2502          background: url(;\a   \2502                          ^\a   \2575 \a   src/scss/character.scss 3:25  @import\a   src/magister-lor.scss 1:9     root stylesheet';
-}
+.character-sheet header{background:rgba(0,0,0,0) url("https://github.com/ryczypior/roll20-character-sheets/blob/master/Stars_Without_Number_Revised/Assets/dice.png") no-repeat 80px 3px !important}
