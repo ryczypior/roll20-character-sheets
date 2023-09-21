@@ -1,3 +1,28 @@
-.character-sheet
+.character-sheet.sheet
     header
-        input(type="text", name="character_name")
+        div
+            input(type="text", name="attr_character_name")
+        div
+            textarea(rows="2", name="attr_character_description")
+    section
+        h2 Cechy i Aspekty
+        div.magisterlor-container-fluid
+            div.magisterlor-row.no-gutters
+                each idx in [0, 1, 2, 3, 4, 5]
+                    div.col-12.col-md-6.col-lg-2
+                        +traitsTags(idx)
+    section
+        div.magisterlor-container-fluid
+            div.magisterlor-row.no-gutters
+                div.col-12.col-md-6
+                    h2 Klucze
+                    +keys()
+                    div.keysInfo Kiedy używasz klucza, zaznacz punkt doświadczenia (PD). Jeśli pakujesz się w kłopoty z powodu swojego klucza, zaznacz 2 PD. Każdy z kluczy ma również Ofertę. Jeśli skorzystasz z Oferty, możesz trwale usunąć klucz, zastąpić go nowym oraz zaznaczyć 5 PD.
+                div.col-12.col-md-6
+                    h2 Sekrety
+                    +secrets()
+            div.magisterlor-row.no-gutters
+                div.col-12.col-md-6
+                div.col-12.col-md-6
+    footer
+        span To jest stopka

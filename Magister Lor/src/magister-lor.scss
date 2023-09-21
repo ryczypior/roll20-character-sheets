@@ -1,1 +1,14 @@
+$inputBackground: transparent;
+$inputBackgroundOnFocus: #dddddd;
+$inputBorderColor: #dddddd;
+$h2background: #241f1f;
+$h2color: #ffffff;
+.sheet{
+    @import "scss/bootstrap/bootstrap-reboot";
+    @import "scss/bootstrap/bootstrap-grid";
+}
+.sheet *, .sheet ::before, .sheet ::after{
+    box-sizing: border-box;
+}
+
 @import "scss/character";
