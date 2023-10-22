@@ -231,8 +231,8 @@ const characters: any = {
     ],
     'states': [
       {
-        'name': '*Chory',
-        'checked': 0
+        'name': 'Chory*',
+        'checked': 1
       },
       {
         'name': 'Ranny',

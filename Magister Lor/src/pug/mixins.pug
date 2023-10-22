@@ -1,10 +1,10 @@
 mixin traitsTags(number)
     div.traitTag
         h3
-            input(type="text", name=`attr_trait_${number}`)
+            input(type="text", name=`attr_trait_${number}`, placeholder=`Nazwa kategorii`)
         ul
             each idx in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                div.trait.magisterlor-row.no-gutters
+                div.trait.magisterlor-row.no-gutters.align-items-center
                     div.radios
                         input.sheet-normal.sheet-zero(type=`radio`, name=`attr_trait_${number}_${idx}_value`, value=`0`, checked=`checked`)
                         span
@@ -13,39 +13,19 @@ mixin traitsTags(number)
                         input.sheet-normal(type=`radio`, name=`attr_trait_${number}_${idx}_value`, value=`2`)
                         span
                     div.name
-                        input(type="text", name=`attr_trait_${number}_${idx}_name`)
+                        input(type="text", name=`attr_trait_${number}_${idx}_name`, placeholder=`Cecha`)
                     div.rollButton
                         button.roll-button
-                    fieldset(class=`col-12 repeating_tag${number}_${idx}`)
-                        .magisterlor-row.no-gutters
+                    fieldset(class=`col-12 repeating_tagx${number}x${idx}`)
+                        .magisterlor-row.no-gutters.tag
                             div.radios
-                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_tag_${number}_${idx}_value`, value=`0`, checked=`checked`)
+                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`0`, checked=`checked`)
                                 span
-                                input.sheet-normal(type=`radio`, name=`attr_tag_${number}_${idx}_value`, value=`1`)
+                                input.sheet-normal(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`1`)
                                 span
-                                input.sheet-normal(type=`radio`, name=`attr_tag_${number}_${idx}_value`, value=`2`)
+                                input.sheet-normal(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`2`)
                                 span
                             div.name
-                                input(type="text", name=`attr_tag_${number}_${idx}_name`)
+                                input(type="text", name=`attr_tagx${number}x${idx}xname`, placeholder=`Aspekt`)
                             div.rollButton
                                 button.roll-button
-
-mixin keys()
-    div.lorKeysSecrets
-        fieldset(class=`repeating_keys`)
-            h3
-                input(type="text", name=`attr_keyName`, placeholder=`Klucz`)
-            div.description
-                textarea(name=`attr_keyDescription`, placeholder=`Opis`)
-            div.buyoff
-                span Oferta:
-                textarea(name=`attr_keyDescription`)
-
-mixin secrets()
-    div.lorKeysSecrets
-        fieldset(class=`repeating_secrets`)
-            h3
-                input(type="text", name=`attr_secretName`, placeholder=`Sekret`)
-            div.description
-                textarea(name=`attr_secretDescription`, placeholder=`Opis`)
-

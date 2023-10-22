@@ -1,7 +1,14 @@
 include pug/mixins.pug
 
-div
-    include pug/character.pug
+input(type="hidden", name="attr_noteditable")
+div.options
+    button.selectChar Postać
+    button.isEditable Edytuj
+div.modes
+    input(type="hidden", name="attr_view_mode")
+    include pug/characterSelection.pug
+    include pug/characterSheet.pug
+    include pug/roll.pug
 
 script(type="text/worker")
     |    (function () {

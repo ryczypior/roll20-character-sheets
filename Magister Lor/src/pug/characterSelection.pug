@@ -1,0 +1,9 @@
+.selectCharacter
+    .row
+        .col12.text-center
+            h1 Wybierz postać
+        .col12.text-center
+            h2 Magister Lor
+        each val in ['Magister Lor', 'Kai Tuvari', 'Kel Tuvari', 'Setarra']
+            .col-12.col-md-2.col-lg-4
+                button.selectCharacterButton(data-character=val)= val

@@ -1,8 +1,13 @@
 $inputBackground: transparent;
 $inputBackgroundOnFocus: #dddddd;
-$inputBorderColor: #dddddd;
-$h2background: #241f1f;
+$placeholder: #dddddd;
+$h2background: #000000;
+$border: #000000;
+$color: #000000;
 $h2color: #ffffff;
+$borderCounter: #ffffff;
+@import url('https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
 .sheet{
     @import "scss/bootstrap/bootstrap-reboot";
     @import "scss/bootstrap/bootstrap-grid";
@@ -10,5 +15,31 @@ $h2color: #ffffff;
 .sheet *, .sheet ::before, .sheet ::after{
     box-sizing: border-box;
 }
+.modes{
+    position: relative;
+}
+@import "scss/characterSheet";
+@import "scss/characterSelection";
 
-@import "scss/character";
+input[name="attr_view_mode"][value="1"] ~ .selectCharacter{
+    left: -150%;
+    opacity: 0;
+}
+input[name="attr_view_mode"][value="0"] ~ .rollMode{
+    left: -150%;
+    opacity: 0;
+}
+input[name="attr_view_mode"][value="1"] ~ .rollMode{
+    left: -150%;
+    opacity: 0;
+}
+
+input[name="attr_view_mode"][value="2"] ~ .selectCharacter{
+    left: -150%;
+    opacity: 0;
+}
+
+input[name="attr_view_mode"][value="2"] ~ .rollMode{
+    left: 0;
+    opacity: 1;
+}

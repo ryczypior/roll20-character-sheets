@@ -1,0 +1,35 @@
+.character-sheet.sheet
+    header
+        div
+            input(type="text", name="attr_character_name", placeholder="Podaj nazwę postaci")
+        div
+            textarea(rows="2", name="attr_character_description", placeholder="Opis postaci")
+    section
+        h2 Cechy i Aspekty
+        div.magisterlor-container-fluid
+            div.magisterlor-row.no-gutters
+                each idx in [0, 1, 2, 3, 4, 5]
+                    div.col-12.col-md-6.col-lg-4.col-xl-2
+                        +traitsTags(idx)
+    section
+        div.magisterlor-container-fluid
+            div.magisterlor-row.no-gutters
+                div.col-12.col-md-6
+                    h2 Klucze
+                    include characterSheet/keys
+                div.col-12.col-md-6
+                    h2 Sekrety
+                    include characterSheet/secrets
+            div.magisterlor-row.no-gutters
+                div.col-12.col-md-6.order-md-1
+                    div.magisterlor-row.no-gutters
+                        div.col-8
+                            include characterSheet/conditions
+                        div.col-4
+                            include characterSheet/pool
+                        div.col-12
+                            include characterSheet/inventory
+                div.col-12.col-md-6.order-md-0
+                    include characterSheet/xp
+    footer
+        a(href="https://skybluekey.itch.io/") skybluekey.itch.io

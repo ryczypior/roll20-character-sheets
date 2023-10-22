@@ -1,0 +1,15 @@
+h2 Pula
+p.poll-small Maksimum
+div.radios
+    input.sheet-normal.sheet-zero(type=`radio`, name=`attr_pool_max`, value=`0`, checked=`checked`)
+    span
+    each idx in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        input.sheet-normal(type=`radio`, name=`attr_pool_max`, value=`${idx}`)
+        span
+p.poll-small Obecnie
+div.radios
+    input.sheet-normal.sheet-zero(type=`radio`, name=`attr_pool_value`, value=`0`, checked=`checked`)
+    span
+    each idx in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        input.sheet-normal(type=`radio`, name=`attr_pool_value`, value=`${idx}`)
+        span
