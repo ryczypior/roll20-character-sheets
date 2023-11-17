@@ -1,10 +1,11 @@
 .traitTag{
+    border: solid 1px $border;
+    border-left: none;
+    height: 100%;
     ul{
         list-style-type: none;
         padding: 0;
         margin: 0;
-        border: solid 1px $border;
-        border-left: none;
         ul{
             padding-left: 15px;
             border: none;
@@ -12,9 +13,7 @@
     }
     h3{
         background: transparent;
-        border: solid 1px $border;
-        border-left: none;
-        border-bottom: none;
+        border-bottom: solid 1px $border;
     }
     h3 input{
         font-size: 1.2em
@@ -33,27 +32,42 @@
     .repcontainer{
         width: 100%;
         .repitem{
-            border-left: solid 1px $border;
-            border-right: solid 1px $border;
+            border-left: solid 1px transparent;
+            border-right: solid 1px transparent;
             position: relative;
             margin: 0 1.4em;
             &:first-of-type{
                 margin: 1em 1.4em 0 1.4em;
-                &:before{
-                    content: "WYBIERZ JEDEN ASPEKT";
-                    font-size: 0.6em;
-                    position: absolute;
-                    top: -1.2em;
-                    left: 1em;
-                    background: #ffffff;
-                    padding: 3px 5px;
-                }
                 padding-top: 0.6em;
-                border-top: solid 1px $border;
+                border-top: solid 1px transparent;
             }
             &:last-of-type{
                 margin: 0 1.4em 1em 1.4em;
-                border-bottom: solid 1px $border;
+                border-bottom: solid 1px transparent;
+            }
+        }
+    }
+    .single{
+        .repcontainer {
+            .repitem{
+                border-left: solid 1px $border;
+                border-right: solid 1px $border;
+                &:first-of-type {
+                    &:before {
+                        content: "WYBIERZ JEDEN ASPEKT";
+                        font-size: 0.6em;
+                        position: absolute;
+                        top: -1.2em;
+                        left: 1em;
+                        background: #ffffff;
+                        padding: 3px 5px;
+                    }
+
+                    border-top: solid 1px $border;
+                }
+                &:last-of-type{
+                    border-bottom: solid 1px $border;
+                }
             }
         }
     }

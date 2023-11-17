@@ -21,6 +21,18 @@ $borderCounter: #ffffff;
 @import "scss/characterSheet";
 @import "scss/characterSelection";
 
+.roll-button{
+    &:before{
+        font-family: "dicefontd20";
+        content: "t";
+    }
+}
+
+.repcontrol{
+    width: 100%;
+    text-align: right;
+}
+
 input[name="attr_view_mode"][value="1"] ~ .selectCharacter{
     left: -150%;
     opacity: 0;

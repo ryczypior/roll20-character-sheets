@@ -3,29 +3,49 @@ mixin traitsTags(number)
         h3
             input(type="text", name=`attr_trait_${number}`, placeholder=`Nazwa kategorii`)
         ul
-            each idx in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-                div.trait.magisterlor-row.no-gutters.align-items-center
-                    div.radios
-                        input.sheet-normal.sheet-zero(type=`radio`, name=`attr_trait_${number}_${idx}_value`, value=`0`, checked=`checked`)
-                        span
-                        input.sheet-normal(type=`radio`, name=`attr_trait_${number}_${idx}_value`, value=`1`)
-                        span
-                        input.sheet-normal(type=`radio`, name=`attr_trait_${number}_${idx}_value`, value=`2`)
-                        span
-                    div.name
-                        input(type="text", name=`attr_trait_${number}_${idx}_name`, placeholder=`Cecha`)
-                    div.rollButton
-                        button.roll-button
-                    fieldset(class=`col-12 repeating_tagx${number}x${idx}`)
-                        .magisterlor-row.no-gutters.tag
+            div.trait.magisterlor-row.no-gutters.align-items-center
+                div.col-12.multi
+                    fieldset(class=`repeating_tagx${number}x0`)
+                        .magisterlor-row.no-gutters.align-items-center
                             div.radios
-                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`0`, checked=`checked`)
+                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_value`, value=`0`, checked=`checked`)
                                 span
-                                input.sheet-normal(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`1`)
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`1`)
                                 span
-                                input.sheet-normal(type=`radio`, name=`attr_tagx${number}x${idx}xvalue`, value=`2`)
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`2`)
                                 span
                             div.name
-                                input(type="text", name=`attr_tagx${number}x${idx}xname`, placeholder=`Aspekt`)
+                                input(type="text", name=`attr_name`, placeholder=`Aspekt`)
                             div.rollButton
-                                button.roll-button
+                                input.sheet-normal(type=`checkbox`, name=`attr_roll`)
+                                span
+                div.col-12.single
+                    fieldset(class=`repeating_tagx${number}x1`)
+                        .magisterlor-row.no-gutters.tag.align-items-center
+                            div.radios
+                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_value`, value=`0`, checked=`checked`)
+                                span
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`1`)
+                                span
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`2`)
+                                span
+                            div.name
+                                input(type="text", name=`attr_name`, placeholder=`Aspekt`)
+                            div.rollButton
+                                input.sheet-normal(type=`checkbox`, name=`attr_roll`)
+                                span
+                div.col-12.single
+                    fieldset(class=`repeating_tagx${number}x2`)
+                        .magisterlor-row.no-gutters.tag.align-items-center
+                            div.radios
+                                input.sheet-normal.sheet-zero(type=`radio`, name=`attr_value`, value=`0`, checked=`checked`)
+                                span
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`1`)
+                                span
+                                input.sheet-normal(type=`radio`, name=`attr_value`, value=`2`)
+                                span
+                            div.name
+                                input(type="text", name=`attr_name`, placeholder=`Aspekt`)
+                            div.rollButton
+                                input.sheet-normal(type=`checkbox`, name=`attr_roll`)
+                                span
