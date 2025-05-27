@@ -1,9 +1,11 @@
 .charsheet,
 .sheet-rolltemplate-move-roll,
 .sheet-rolltemplate-dual-hit-move-roll,
+.sheet-rolltemplate-ten-hit-move-roll,
 .sheet-rolltemplate-multi-hit-move-roll,
 .sheet-rolltemplate-triple-hit-move-roll,
-.sheet-rolltemplate-feature-output {
+.sheet-rolltemplate-feature-output,
+.sheet-rolltemplate-inline-skill-roll {
   --poke-bug: #c6d16e;
   --poke-bug-background: #ffffb280;
   --poke-bug-shaded: #828d2a;
@@ -97,6 +99,7 @@
   --stat-ro-spd: #ff99ff80;
 }
 
+.sheet-rolltemplate-inline-skill-roll,
 .sheet-rolltemplate-skill-roll {
   --atk-gradient: #bb5555;
   --atk-header: #ff9999;
@@ -120,7 +123,8 @@
 }
 
 .sheet-wrapper {
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/whitePokeballBackgroundSmall.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/whitePokeballBackgroundSmall.png");
+  background-image: var(--background-image);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: auto;
@@ -128,15 +132,32 @@
   border: 2px solid #000000;
   min-height: 200px;
   min-width: 680px;
-  padding: 10px;
+  --wrapper-padding: 10px;
+  padding: var(--wrapper-padding);
 }
 
 .sheet-darkmode .sheet-wrapper {
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundSmall.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundSmall.png");
 }
 
 .sheet-type-colors {
   display: block;
+}
+
+div.sheet-character-avatar {
+  max-width: 240px;
+  max-height: 240px;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+img.sheet-avatar-image {
+  width: 87.5%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 28px;
+  border: var(--text-background-color) solid 16px;
 }
 
 /* Fancy colors */
@@ -147,290 +168,335 @@ button.sheet-hidden-setting {
 }
 
 input.sheet-color-setting[value="bug"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="bug"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="bug"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="bug"] ~ div.sheet-class-feature {
   --background-color: var(--poke-bug);
   --foreground-color: var(--poke-bug-shaded);
   --text-background-color: var(--poke-bug-background);
 }
 
 input.sheet-color-setting[value="dark"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="dark"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="dark"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="dark"] ~ div.sheet-class-feature {
   --background-color: var(--poke-dark);
   --foreground-color: var(--poke-dark-shaded);
   --text-background-color: var(--poke-dark-background);
 }
 
 input.sheet-color-setting[value="dragon"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="dragon"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="dragon"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="dragon"] ~ div.sheet-class-feature {
   --background-color: var(--poke-dragon);
   --foreground-color: var(--poke-dragon-shaded);
   --text-background-color: var(--poke-dragon-background);
 }
 
 input.sheet-color-setting[value="electric"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="electric"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="electric"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="electric"] ~ div.sheet-class-feature {
   --background-color: var(--poke-electric);
   --foreground-color: var(--poke-electric-shaded);
   --text-background-color: var(--poke-electric-background);
 }
 
 input.sheet-color-setting[value="fairy"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="fairy"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="fairy"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="fairy"] ~ div.sheet-class-feature {
   --background-color: var(--poke-fairy);
   --foreground-color: var(--poke-fairy-shaded);
   --text-background-color: var(--poke-fairy-background);
 }
 
 input.sheet-color-setting[value="fighting"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="fighting"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="fighting"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="fighting"] ~ div.sheet-class-feature {
   --background-color: var(--poke-fighting);
   --foreground-color: var(--poke-fighting-shaded);
   --text-background-color: var(--poke-fighting-background);
 }
 
 input.sheet-color-setting[value="fire"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="fire"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="fire"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="fire"] ~ div.sheet-class-feature {
   --background-color: var(--poke-fire);
   --foreground-color: var(--poke-fire-shaded);
   --text-background-color: var(--poke-fire-background);
 }
 
 input.sheet-color-setting[value="flying"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="flying"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="flying"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="flying"] ~ div.sheet-class-feature {
   --background-color: var(--poke-flying);
   --foreground-color: var(--poke-flying-shaded);
   --text-background-color: var(--poke-flying-background);
 }
 
 input.sheet-color-setting[value="ghost"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="ghost"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="ghost"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="ghost"] ~ div.sheet-class-feature {
   --background-color: var(--poke-ghost);
   --foreground-color: var(--poke-ghost-shaded);
   --text-background-color: var(--poke-ghost-background);
 }
 
 input.sheet-color-setting[value="grass"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="grass"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="grass"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="grass"] ~ div.sheet-class-feature {
   --background-color: var(--poke-grass);
   --foreground-color: var(--poke-grass-shaded);
   --text-background-color: var(--poke-grass-background);
 }
 
 input.sheet-color-setting[value="ground"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="ground"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="ground"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="ground"] ~ div.sheet-class-feature {
   --background-color: var(--poke-ground);
   --foreground-color: var(--poke-ground-shaded);
   --text-background-color: var(--poke-ground-background);
 }
 
 input.sheet-color-setting[value="ice"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="ice"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="ice"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="ice"] ~ div.sheet-class-feature {
   --background-color: var(--poke-ice);
   --foreground-color: var(--poke-ice-shaded);
   --text-background-color: var(--poke-ice-background);
 }
 
 input.sheet-color-setting[value="normal"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="normal"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="normal"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="normal"] ~ div.sheet-class-feature {
   --background-color: var(--poke-normal);
   --foreground-color: var(--poke-normal-shaded);
   --text-background-color: var(--poke-normal-background);
 }
 
 input.sheet-color-setting[value="poison"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="poison"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="poison"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="poison"] ~ div.sheet-class-feature {
   --background-color: var(--poke-poison);
   --foreground-color: var(--poke-poison-shaded);
   --text-background-color: var(--poke-poison-background);
 }
 
 input.sheet-color-setting[value="psychic"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="psychic"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="psychic"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="psychic"] ~ div.sheet-class-feature {
   --background-color: var(--poke-psychic);
   --foreground-color: var(--poke-psychic-shaded);
   --text-background-color: var(--poke-psychic-background);
 }
 
 input.sheet-color-setting[value="rock"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="rock"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="rock"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="rock"] ~ div.sheet-class-feature {
   --background-color: var(--poke-rock);
   --foreground-color: var(--poke-rock-shaded);
   --text-background-color: var(--poke-rock-background);
 }
 
 input.sheet-color-setting[value="steel"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="steel"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="steel"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="steel"] ~ div.sheet-class-feature {
   --background-color: var(--poke-steel);
   --foreground-color: var(--poke-steel-shaded);
   --text-background-color: var(--poke-steel-background);
 }
 
 input.sheet-color-setting[value="typeless"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="typeless"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="typeless"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="typeless"] ~ div.sheet-class-feature {
   --background-color: var(--poke-typeless);
   --foreground-color: var(--poke-typeless-shaded);
   --text-background-color: var(--poke-typeless-background);
 }
 
 input.sheet-color-setting[value="water"] ~ div.sheet-wrapper,
-input.sheet-color-setting-move[value="water"] ~ div.sheet-pokemon-move {
+input.sheet-color-setting-move[value="water"] ~ div.sheet-pokemon-move,
+input.sheet-color-setting-feature[value="water"] ~ div.sheet-class-feature {
   --background-color: var(--poke-water);
   --foreground-color: var(--poke-water-shaded);
   --text-background-color: var(--poke-water-background);
 }
 
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  color: #555555;
+}
+
 /* Fancy colors, in DARK MODE */
 
 .sheet-darkmode input.sheet-color-setting[value="bug"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="bug"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="bug"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="bug"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-bug);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundBug.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundBug.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="dark"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="dark"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="dark"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="dark"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-dark);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundDark.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundDark.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="dragon"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="dragon"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="dragon"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="dragon"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-dragon);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundDragon.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundDragon.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="electric"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="electric"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="electric"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="electric"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-electric);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundElectric.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundElectric.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="fairy"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="fairy"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="fairy"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="fairy"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-fairy);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFairy.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFairy.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="fighting"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="fighting"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="fighting"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="fighting"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-fighting);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFighting.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFighting.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="fire"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="fire"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="fire"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="fire"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-fire);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFire.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFire.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="flying"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="flying"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="flying"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="flying"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-flying);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFlying.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundFlying.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="ghost"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="ghost"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="ghost"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="ghost"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-ghost);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGhost.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGhost.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="grass"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="grass"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="grass"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="grass"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-grass);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGrass.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGrass.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="ground"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="ground"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="ground"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="ground"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-ground);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGround.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundGround.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="ice"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="ice"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="ice"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="ice"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-ice);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundIce.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundIce.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="normal"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="normal"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="normal"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="normal"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-normal);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundNormal.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundNormal.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="poison"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="poison"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="poison"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="poison"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-poison);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundPoison.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundPoison.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="psychic"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="psychic"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="psychic"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="psychic"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-psychic);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundPsychic.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundPsychic.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="rock"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="rock"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="rock"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="rock"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-rock);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundRock.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundRock.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="steel"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="steel"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="steel"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="steel"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-steel);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundSteel.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundSteel.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="typeless"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="typeless"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="typeless"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="typeless"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-typeless);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundTypeless.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundTypeless.png");
 }
 
 .sheet-darkmode input.sheet-color-setting[value="water"] ~ div.sheet-wrapper,
-.sheet-darkmode input.sheet-color-setting-move[value="water"] ~ div.sheet-pokemon-move {
+.sheet-darkmode input.sheet-color-setting-move[value="water"] ~ div.sheet-pokemon-move,
+.sheet-darkmode input.sheet-color-setting-feature[value="water"] ~ div.sheet-class-feature {
   --background-color: var(--poke-all-dark);
   --foreground-color: var(--poke-water);
   --text-background-color: var(--poke-all-dark-background);
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundWater.png");
+  --background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/darkPokeballBackgroundWater.png");
 }
 
 .sheet-darkmode input[type="text"],
@@ -442,6 +508,11 @@ input.sheet-color-setting-move[value="water"] ~ div.sheet-pokemon-move {
 
 .sheet-darkmode option {
   background-color: #333333;
+}
+
+input.sheet-stat-ball-color {
+  margin: 5px;
+  padding: 0px;
 }
 
 .sheet-darkmode input.sheet-stat-ball-color[type="number"],
@@ -514,26 +585,65 @@ div.sheet-pokemon-move span.sheet-readonly-field input[type="number"] {
   font-style: italic;
 }
 
-div.sheet-wrapper,
+div.sheet-collapsible-feature,
+div.sheet-feature-container,
 div.sheet-pokemon-move,
-div.sheet-collapsible-feature {
+div.sheet-wrapper {
   background-color: var(--background-color);
   border-color: var(--foreground-color);
+  display: grid;
+  grid-template: "top-left" 1fr / 1fr;
+  position: relative;
 }
 
-div.sheet-pokemon-move {
-  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/whitePokeballBackgroundSmall.png");
+div.sheet-no-background {
+  background-color: #00000000;
+}
+
+div.sheet-pokemon-move,
+div.sheet-class-feature {
+  background-image: var(--background-image);
   background-position: right top;
   background-repeat: no-repeat;
   background-size: 150px;
+}
+
+/* Sheet background and styling for Form Changes */
+
+input.sheet-form-setting[value="mega"] ~ div.sheet-wrapper {
+  /* Intentionally not setting --background-image, want to keep moves and other sections as they are */
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/MegaBack.png");
+  background-size: 300px;
+  border: 4px solid transparent;
+  --wrapper-padding: 8px;
+  border-image: repeating-linear-gradient(to bottom right, #b827fc 0px, #2c90fc 100px, #b8fd33 200px, #fec837 300px, #fd1892 400px, #b827fc 450px);
+  border-image-slice: 1;
+}
+
+input.sheet-form-setting[value="dyna"] ~ div.sheet-wrapper {
+  /* Intentionally not setting --background-image, want to keep moves and other sections as they are */
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/DynaBack.png");
+  background-size: 400px;
+  border: 4px solid #d42368;
+  border-style: groove;
+  --wrapper-padding: 8px;
+}
+
+input.sheet-form-setting[value="tera"] ~ div.sheet-wrapper {
+  /* Intentionally not setting --background-image, want to keep moves and other sections as they are */
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/TeraBack.png");
+  background-size: 300px;
+  border: 4px solid transparent;
+  --wrapper-padding: 8px;
+  border-image: repeating-linear-gradient(to bottom right, var(--foreground-color) 0px, #92acc3 30px, var(--foreground-color) 60px);
+  border-image-slice: 1;
 }
 
 /* End fancy colors */
 
 div.sheet-character-stat-grid b,
 div.sheet-character-stat-grid p {
-  padding-bottom: 10px;
-  padding-top: 5px;
+  margin: 5px
 }
 
 .sheet-configuration-grid {
@@ -544,16 +654,28 @@ div.sheet-character-stat-grid p {
   padding: 6px;
 }
 
+.sheet-extra-row-gap {
+  row-gap: 10px;
+}
+
 div.sheet-skill-selection .sheet-no-dropdown {
   width: 45%;
 }
 
 .sheet-logo {
-  width: 280px;
-  height: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: -15px;
+  min-height: 150px;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/PokemonTabletopAdventures_v3/images/PTA3SmallLogo.png");
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+.sheet-form-buttons {
+  display: grid;
+  row-gap: 5px;
+  justify-items: end;
+  position: absolute;
+  top: var(--wrapper-padding);
+  right: var(--wrapper-padding);
 }
 
 .sheet-inventory {
@@ -596,10 +718,8 @@ p {
 .sheet-ball {
   display: block;
   text-align: center;
-  margin-right: auto;
-  margin-left: auto;
-  min-width: 60px;
-  min-height: 60px;
+  width: 130px;
+  height: 120px;
   background-position: 50% 30%;
   background-repeat: no-repeat;
 }
@@ -640,11 +760,21 @@ p {
   align-items: center;
 }
 
+.sheet-character-image-stats-grid {
+  display: grid;
+  grid-row-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(390px, 1fr));
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 32px;
+}
+
 .sheet-character-stat-grid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   justify-items: center;
   text-align: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  width: 100%;
 }
 
 .sheet-below-stats {
@@ -691,6 +821,8 @@ label.sheet-afflictions-text {
 
 .sheet-text-background {
   background-color: var(--text-background-color);
+  border-radius: 6px;
+  padding: 6px;
 }
 
 .sheet-top-information[type="number"],
@@ -721,6 +853,15 @@ label.sheet-afflictions-text {
   width: 70px;
 }
 
+.charsheet input.sheet-custom-move-name[type="text"] {
+  border: 2px var(--foreground-color);
+  border-style: none none solid none;
+  color: var(--foreground-color);
+  vertical-align: revert;
+  width: 300px;
+  font-size: 18px;
+}
+
 .charsheet input.sheet-affliction-display[type="text"] {
   border: none;
   color: var(--foreground-color);
@@ -736,6 +877,10 @@ label.sheet-afflictions-text {
 
 textarea.sheet-3row-textarea{
   height: 72px;
+}
+
+textarea.sheet-2row-textarea-wide{
+  height: 48px;
 }
 
 .sheet-character-skill-labels {
@@ -791,6 +936,7 @@ select.sheet-no-dropdown::-ms-expand {
   grid-template-columns: 2fr 1fr 1fr 1.5fr 1fr;
 }
 
+.sheet-class-feature-info-header,
 .sheet-pokemon-move-info-header {
   display: flex;
   justify-content: space-between;
@@ -934,6 +1080,13 @@ input.sheet-character-type[value="hybrid"] ~ div.sheet-tab-hybrid {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+.sheet-pokemon-form-stats-grid {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
 /* Stat Colors */
 
 .sheet-attack-color[type="number"] {
@@ -995,7 +1148,7 @@ input[type="text"].sheet-skill-total {
 .sheet-stat-ball-color[type="number"] {
   background-color: #ff999900;
   border: 0;
-  color: #000000;
+  font-size: 1em;
   outline: none;
 }
 
@@ -1037,11 +1190,12 @@ button[type="roll"].sheet-skill-roller:hover {
   background: #00000000;
   border: none;
   box-shadow: none;
+  color: #555555;
   font-size: 1em;
   font-style: italic;
   font-weight: bold;
   padding: 0px 0px;
-  margin: 5px 0px;
+  margin: 5px;
   text-shadow: none;
 }
 
@@ -1075,27 +1229,157 @@ button[type="roll"].sheet-stat-roller:hover {
   margin-left: 15px;
 }
 
+.ui-dialog .charsheet .repcontainer.editmode .repitem .itemcontrol {
+  z-index: 1;
+}
+
 /* Roll Templates */
 
-.sheet-rolltemplate-move-roll,
-.sheet-rolltemplate-dual-hit-move-roll,
-.sheet-rolltemplate-multi-hit-move-roll,
-.sheet-rolltemplate-triple-hit-move-roll,
-.sheet-rolltemplate-feature-output {
-  --header-text: black;
+/* Inline Skill Roll */
+
+.sheet-rolltemplate-inline-skill-roll {
+  --header-text: #000000;
+  --main-text: #000000;
+  --odd-row-bg: #d9d9d6;
+  --row-bg: #e9e9e9;
 }
 
+.sheet-rolltemplate-darkmode.sheet-rolltemplate-inline-skill-roll {
+  --header-text: #dddddd;
+  --main-text: #dddddd;
+  --odd-row-bg: #303030;
+  --row-bg: #404040;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-labelled-table-wrapper {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-template-columns: 5% 95%;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-labelled-table-wrapper span.sheet-border-label {
+  background: var(--header-bg);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-collapse: separate;
+  color: var(--main-text);
+  font-size: 12px;
+  height: auto;
+  padding-right: 2px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  transform: scale(-1, -1);
+  width: 100%;
+  writing-mode: vertical-lr;
+  -webkit-text-stroke: 0.5px var(--poke-all-dark-background);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-container table.sheet-inline-skill-template {
+  background: var(--row-bg);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-collapse: separate;
+  box-sizing: border-box;
+  color: var(--main-text);
+  font-size: 12px;
+  height: 100%;
+  line-height: 2em;
+  overflow: clip;
+  padding-left: 2px;
+  width: 100%;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-container table.sheet-inline-skill-template td.sheet-label {
+  font-weight: bold;
+  padding-left: 4px;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-container table.sheet-inline-skill-template td.sheet-subhead {
+  border-bottom: 1px solid var(--odd-row-bg);
+  font-size: 12px;
+  font-style: italic;
+  padding-left: 4px;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-container table.sheet-inline-skill-template a {
+  color: var(--header-text);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-container table.sheet-inline-skill-template .sheet-skill-roll .inlinerollresult {
+  background: inherit;
+  border: none;
+  font-size: inherit;
+  padding: 0px;
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-rolltemplate-color-setting-atk-skill {
+  --border-color: var(--poke-all-dark-background);
+  --header-bg: var(--atk-gradient);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-rolltemplate-color-setting-def-skill {
+  --border-color: var(--poke-all-dark-background);
+  --header-bg: var(--def-gradient);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-rolltemplate-color-setting-spatk-skill {
+  --border-color: var(--poke-all-dark-background);
+  --header-bg: var(--spatk-gradient);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-rolltemplate-color-setting-spdef-skill {
+  --border-color: var(--poke-all-dark-background);
+  --header-bg: var(--spdef-gradient);
+}
+
+.sheet-rolltemplate-inline-skill-roll .sheet-rolltemplate-color-setting-spd-skill {
+  --border-color: var(--poke-all-dark-background);
+  --header-bg: var(--spd-gradient);
+}
+
+
+.sheet-rolltemplate-inline-skill-roll.sheet-rolltemplate-darkmode .sheet-rolltemplate-color-setting-atk-skill {
+  --border-color: var(--atk-gradient);
+  --header-bg: var(--atk-header-dark);
+}
+
+.sheet-rolltemplate-inline-skill-roll.sheet-rolltemplate-darkmode .sheet-rolltemplate-color-setting-def-skill {
+  --border-color: var(--def-gradient);
+  --header-bg: var(--def-header-dark);
+}
+
+.sheet-rolltemplate-inline-skill-roll.sheet-rolltemplate-darkmode .sheet-rolltemplate-color-setting-spatk-skill {
+  --border-color: var(--spatk-gradient);
+  --header-bg: var(--spatk-header-dark);
+}
+
+.sheet-rolltemplate-inline-skill-roll.sheet-rolltemplate-darkmode .sheet-rolltemplate-color-setting-spdef-skill {
+  --border-color: var(--spdef-gradient);
+  --header-bg: var(--spdef-header-dark);
+}
+
+.sheet-rolltemplate-inline-skill-roll.sheet-rolltemplate-darkmode .sheet-rolltemplate-color-setting-spd-skill {
+  --border-color: var(--spd-gradient);
+  --header-bg: var(--spd-header-dark);
+}
+
+
+/* Other Templates */
+
+.sheet-rolltemplate-move-roll,
+.sheet-rolltemplate-dual-hit-move-roll,
+.sheet-rolltemplate-ten-hit-move-roll,
+.sheet-rolltemplate-multi-hit-move-roll,
+.sheet-rolltemplate-triple-hit-move-roll,
+.sheet-rolltemplate-feature-output,
 .sheet-rolltemplate-skill-roll {
-  --header-text: black;
-}
-
-.sheet-rolltemplate-move-roll,
-.sheet-rolltemplate-dual-hit-move-roll,
-.sheet-rolltemplate-multi-hit-move-roll,
-.sheet-rolltemplate-triple-hit-move-roll,
-.sheet-rolltemplate-skill-roll,
-.sheet-rolltemplate-feature-output {
-  --main-text: black;
+  --header-text: #000000;
+  --main-text: #000000;
   --odd-row-bg: #d9d9d6;
   --row-bg: #e9e9e9;
   text-transform: capitalize;
@@ -1103,6 +1387,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-move-roll,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-dual-hit-move-roll,
+.sheet-rolltemplate-darkmode.sheet-rolltemplate-ten-hit-move-roll,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-multi-hit-move-roll,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-triple-hit-move-roll,
 .sheet-rolltemplate-darkmode.sheet-rolltemplate-feature-output,
@@ -1111,6 +1396,7 @@ button[type="roll"].sheet-stat-roller:hover {
   --main-text: #dddddd;
   --odd-row-bg: #303030;
   --row-bg: #404040;
+  text-transform: capitalize;
 }
 
 .sheet-rolltemplate-color-setting-bug-move {
@@ -1357,6 +1643,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container hr.sheet-border,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container hr.sheet-border,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container hr.sheet-border,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container hr.sheet-border,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container hr.sheet-border,
 .sheet-rolltemplate-skill-roll .sheet-container hr.sheet-border,
@@ -1367,12 +1654,17 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template,
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template,
 .sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template {
-  border: 1px solid;
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  border-collapse: separate;
+  border-spacing: 0px;
+  box-sizing: border-box;
+  overflow: clip;
   color: var(--main-text);
   font-size: 12px;
   line-height: 1em;
@@ -1381,6 +1673,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .sheet-crit-damage-text,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-crit-damage-text,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-crit-damage-text,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-crit-damage-text,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-crit-damage-text {
   font-weight: bold;
@@ -1390,6 +1683,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll .inlinerollresult,
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template .sheet-skill-roll .inlinerollresult {
@@ -1400,6 +1694,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .sheet-notes-text .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-notes-text .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-notes-text .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-notes-text .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-notes-text .inlinerollresult,
 .sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template .sheet-notes-text .inlinerollresult {
@@ -1411,9 +1706,11 @@ button[type="roll"].sheet-stat-roller:hover {
 }
 
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-accuracy-roll,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-damage-roll,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-damage-roll,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-damage-roll,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-damage-roll {
   text-align: center;
@@ -1430,10 +1727,12 @@ button[type="roll"].sheet-stat-roller:hover {
 /* Varying colour by effectiveness for damage roll and text  */
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript--2-effectiveness-text-color {
   background: #800000;
@@ -1443,10 +1742,12 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript--1-effectiveness-text-color {
   background: #cf6800;
@@ -1456,18 +1757,22 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-0-effectiveness-text-color,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .sheet-0-effectiveness-text-color {
   background: #000000;
@@ -1477,10 +1782,12 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-1-effectiveness-text-color {
   background: #000080;
@@ -1490,10 +1797,12 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-color .inlinerollresult,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-color .inlinerollresult,
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-text-color,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-text-color,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-text-color,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-text-color,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template .userscript-2-effectiveness-text-color {
   background: #008000;
@@ -1503,6 +1812,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template a,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template a,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template a,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template a,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template a,
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template a,
@@ -1514,6 +1824,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td {
   padding: 4px 2px;
@@ -1526,9 +1837,11 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td.sheet-effectiveness-text,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-effectiveness-text,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-effectiveness-text,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-effectiveness-text,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-effectiveness-text,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-targeted-defense,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-targeted-defense,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-targeted-defense,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-targeted-defense {
   font-weight: bold;
@@ -1540,6 +1853,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td.sheet-label,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-label,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-label,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-label,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-label,
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template td.sheet-label {
@@ -1551,6 +1865,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
 .sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template td.sheet-notes-text {
@@ -1562,10 +1877,11 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td.sheet-subhead,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-subhead,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-subhead,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-subhead,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-subhead,
-.sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template td.sheet-subhead,
-.sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template td.sheet-subhead {
+.sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template td.sheet-subhead,
+.sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template td.sheet-subhead {
   padding: 4px;
   background: var(--box-bg);
   font-size: 12px;
@@ -1574,6 +1890,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template th,
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template th,
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template th,
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template th,
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template th,
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template th,
@@ -1587,6 +1904,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template tr:nth-child(odd),
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(odd),
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(odd),
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(odd),
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(odd),
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template tr:nth-child(odd),
@@ -1596,6 +1914,7 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template tr:nth-child(even),
 .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(even),
+.sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(even),
 .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(even),
 .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template tr:nth-child(even),
 .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template tr:nth-child(even),
@@ -1605,12 +1924,47 @@ button[type="roll"].sheet-stat-roller:hover {
 
 .sheet-options-flag:not(:checked) ~ div.sheet-display,
 .sheet-options-flag:checked ~ div.sheet-options {
-  display: block;
+  max-height: 1200px;
+  opacity: 1;
+  overflow: scroll;
+  scrollbar-width: none;
+  transition-property: max-height, opacity, visibility;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(.55,.06,.68,.19);
+  visibility: visible;
+}
+
+.sheet-options-flag:not(:checked) ~ div.sheet-display::-webkit-scrollbar,
+.sheet-options-flag:checked ~ div.sheet-options::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+.sheet-extra-max-height .sheet-options-flag:not(:checked) ~ div.sheet-display,
+.sheet-extra-max-height .sheet-options-flag:checked ~ div.sheet-options {
+  max-height: 1800px;
 }
 
 .sheet-options-flag:checked ~ div.sheet-display,
 .sheet-options-flag:not(:checked) ~ div.sheet-options {
-  display: none;
+  max-height: 0px;
+  opacity: 0;
+  overflow: hidden;
+  transition-property: max-height, opacity, visibility;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(.22,.61,.36,1);
+  visibility: hidden;
+}
+
+div.sheet-collapsible-feature div.sheet-display,
+div.sheet-collapsible-feature div.sheet-options,
+div.sheet-feature-container div.sheet-display,
+div.sheet-feature-container div.sheet-options,
+div.sheet-pokemon-move div.sheet-display,
+div.sheet-pokemon-move div.sheet-options,
+div.sheet-wrapper div.sheet-display,
+div.sheet-wrapper div.sheet-options {
+  grid-area: top-left;
 }
 
 button[type="roll"].sheet-inline-roller:hover {
@@ -1627,23 +1981,47 @@ button[type="roll"].sheet-inline-roller {
   width: 30%;
 }
 
+.sheet-class-feature-info-header input[type="text"],
 .sheet-pokemon-move-info-header input[type="text"] {
   margin-left: 4px;
   width: 30%;
 }
 
-.sheet-collapsible-feature .sheet-options-flag,
-.sheet-collapsible-feature .sheet-options-flag + span,
-.sheet-pokemon-move .sheet-options-flag,
-.sheet-pokemon-move .sheet-options-flag + span {
-  top: 10px;
+.sheet-class-feature-info-header select {
+  margin: 5px 0px;
 }
 
-.sheet-collapsible-feature .sheet-options-flag:checked,
-.sheet-collapsible-feature .sheet-options-flag:checked + span,
-.sheet-pokemon-move .sheet-options-flag:checked,
-.sheet-pokemon-move .sheet-options-flag:checked + span {
+.sheet-collapsible-feature > .sheet-options-flag,
+.sheet-collapsible-feature > .sheet-options-flag + span,
+.sheet-collapsible-feature > .sheet-options-flag:checked,
+.sheet-collapsible-feature > .sheet-options-flag:checked + span,
+.sheet-pokemon-move > .sheet-options-flag,
+.sheet-pokemon-move > .sheet-options-flag + span,
+.sheet-pokemon-move > .sheet-options-flag:checked,
+.sheet-pokemon-move > .sheet-options-flag:checked + span {
   top: 13px;
+  left: 6px;
+}
+
+.sheet-feature-container > .sheet-options-flag,
+.sheet-feature-container > .sheet-options-flag + span,
+.sheet-feature-container > .sheet-options-flag:checked,
+.sheet-feature-container > .sheet-options-flag:checked + span {
+  left: 8px;
+  top: 6px;
+}  
+
+h3.sheet-section-header {
+  color: var(--foreground-color);
+  margin-bottom: 8px;
+  padding-left: 40px;
+}
+
+b.sheet-subsection-header {
+  display: block;
+  line-height: 24px;
+  margin-bottom: 8px;
+  padding-left: 32px;
 }
 
 .sheet-options-flag {
@@ -1661,13 +2039,13 @@ button[type="roll"].sheet-inline-roller {
   color: var(--foreground-color);
   cursor: pointer;
   display: none;
-  font-size: 20px;
+  font-size: 16px;
   font-family: pictos;
-  height: 18px;
+  height: 16px;
   margin-top: 0px;
   position: absolute;
   white-space: nowrap;
-  width: 18px;
+  width: 16px;
 }
 
 .sheet-options-flag:hover + span {
@@ -1681,8 +2059,9 @@ button[type="roll"].sheet-inline-roller {
   display: flex;
 }
 
-.sheet-collapsible-feature:hover .sheet-options-flag + span,
-.sheet-pokemon-move:hover .sheet-options-flag + span {
+.sheet-collapsible-feature:hover > .sheet-options-flag + span,
+.sheet-feature-container > .sheet-options-flag + span,
+.sheet-pokemon-move:hover > .sheet-options-flag + span {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1694,11 +2073,161 @@ button[type="roll"].sheet-inline-roller {
   width: 0%;
 }
 
+.sheet-enable-tera:not(:checked) ~ div.sheet-tera-enabled {
+  display: none;
+}
+.sheet-enable-tera:checked ~ div.sheet-tera-enabled {
+  display: inline-block;
+}
+.sheet-enable-dyna:not(:checked) ~ div.sheet-dyna-enabled {
+  display: none;
+}
+.sheet-enable-dyna:checked ~ div.sheet-dyna-enabled {
+  display: inline-block;
+}
+.sheet-enable-mega:not(:checked) ~ div.sheet-mega-enabled {
+  display: none;
+}
+.sheet-enable-mega:checked ~ div.sheet-mega-enabled {
+  display: inline-block;
+}
+.sheet-enable-custom1:not(:checked) ~ div.sheet-custom1-enabled {
+  display: none;
+}
+.sheet-enable-custom1:checked ~ div.sheet-custom1-enabled {
+  display: inline-block;
+}
+.sheet-enable-custom2:not(:checked) ~ div.sheet-custom2-enabled {
+  display: none;
+}
+.sheet-enable-custom2:checked ~ div.sheet-custom2-enabled {
+  display: inline-block;
+}
+.sheet-enable-custom3:not(:checked) ~ div.sheet-custom3-enabled {
+  display: none;
+}
+.sheet-enable-custom3:checked ~ div.sheet-custom3-enabled {
+  display: inline-block;
+}
+
+
+.sheet-active_type-transformation:not(:checked) ~ div.sheet-display-when-type-transformed {
+  display: none;
+}
+.sheet-active_type-transformation:checked ~ div.sheet-display-when-type-transformed {
+  display: inline-block;
+}
+.sheet-active_type-transformation:not(:checked) ~ div.sheet-display-when-type-not-transformed {
+  display: inline-block;
+}
+.sheet-active_type-transformation:checked ~ div.sheet-display-when-type-not-transformed {
+  display: none;
+}
+
+.sheet-active_stat-transformation:not(:checked) ~ div.sheet-display-when-stat-transformed {
+  display: none;
+}
+.sheet-active_stat-transformation:checked ~ div.sheet-display-when-stat-transformed {
+  display: grid;
+}
+
+.sheet-active_dyna:not(:checked) ~ div.sheet-display-when-dyna-inline {
+  display: none;
+}
+.sheet-active_dyna:checked ~ div.sheet-display-when-dyna-inline {
+  display: inline-block;
+}
+.sheet-active_dyna:not(:checked) ~ div.sheet-display-when-not-dyna {
+  display: inline-block;
+}
+.sheet-active_dyna:checked ~ div.sheet-display-when-not-dyna {
+  display: none;
+}
+
+.sheet-active_tera:not(:checked) ~ div.sheet-display-when-tera {
+  display: none;
+}
+.sheet-active_tera:checked ~ div.sheet-display-when-tera {
+  display: flex;
+}
+.sheet-active_dyna:not(:checked) ~ div.sheet-display-when-dyna {
+  display: none;
+}
+.sheet-active_dyna:checked ~ div.sheet-display-when-dyna {
+  display: flex;
+}
+.sheet-active_mega:not(:checked) ~ div.sheet-display-when-mega {
+  display: none;
+}
+.sheet-active_mega:checked ~ div.sheet-display-when-mega {
+  display: flex;
+}
+.sheet-active_custom1:not(:checked) ~ div.sheet-display-when-custom1 {
+  display: none;
+}
+.sheet-active_custom1:checked ~ div.sheet-display-when-custom1 {
+  display: flex;
+}
+.sheet-active_custom2:not(:checked) ~ div.sheet-display-when-custom2 {
+  display: none;
+}
+.sheet-active_custom2:checked ~ div.sheet-display-when-custom2 {
+  display: flex;
+}
+.sheet-active_custom3:not(:checked) ~ div.sheet-display-when-custom3 {
+  display: none;
+}
+.sheet-active_custom3:checked ~ div.sheet-display-when-custom3 {
+  display: flex;
+}
+
+.sheet-enable-tera:not(:checked) ~ div.sheet-tera-config {
+  display: none;
+}
+.sheet-enable-tera:checked ~ div.sheet-tera-config {
+  display: inline-block;
+}
+.sheet-enable-dyna:not(:checked) ~ div.sheet-dyna-config {
+  display: none;
+}
+.sheet-enable-dyna:checked ~ div.sheet-dyna-config {
+  display: inline-block;
+}
+.sheet-enable-mega:not(:checked) ~ div.sheet-mega-config {
+  display: none;
+}
+.sheet-enable-mega:checked ~ div.sheet-mega-config {
+  display: inline-block;
+}
+.sheet-enable-custom1:not(:checked) ~ div.sheet-custom1-config {
+  display: none;
+}
+.sheet-enable-custom1:checked ~ div.sheet-custom1-config {
+  display: inline-block;
+}
+.sheet-enable-custom2:not(:checked) ~ div.sheet-custom2-config {
+  display: none;
+}
+.sheet-enable-custom2:checked ~ div.sheet-custom2-config {
+  display: inline-block;
+}
+.sheet-enable-custom3:not(:checked) ~ div.sheet-custom3-config {
+  display: none;
+}
+.sheet-enable-custom3:checked ~ div.sheet-custom3-config {
+  display: inline-block;
+}
+
+input.sheet-capitalize {
+  text-transform: capitalize;
+}
+
 /* For your PokeGear and other mobile devices */
 @media only screen and (max-width: 480px) {
   .sheet-wrapper {
       min-width: 320px;
-      font-size: 1.1em
+      font-size: 1.1em;
+      overflow: auto;
   }
 
   .sheet-2col-centered {
@@ -1708,17 +2237,23 @@ button[type="roll"].sheet-inline-roller {
   .sheet-configuration-grid {
     grid-template-columns: 1fr;
   }
-
-  .sheet-character-stat-grid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
+  
   .sheet-character-skill-labels {
     grid-template-columns: 1fr 5fr 1fr 1fr;
   }
 
+  .sheet-feature-container > .sheet-options-flag,
+  .sheet-feature-container > .sheet-options-flag + span,
+  .sheet-feature-container > .sheet-options-flag:checked,
+  .sheet-feature-container > .sheet-options-flag:checked + span {
+    left: 8px;
+    top: 22px;
+  }  
+
+
   .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template,
   .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template,
+  .sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template,
   .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template,
   .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template,
   .sheet-rolltemplate-skill-roll .sheet-container table.sheet-skill-template,
@@ -1730,6 +2265,7 @@ button[type="roll"].sheet-inline-roller {
   
   .sheet-rolltemplate-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
   .sheet-rolltemplate-dual-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
+  .sheet-rolltemplate-ten-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
   .sheet-rolltemplate-multi-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
   .sheet-rolltemplate-triple-hit-move-roll .sheet-container table.sheet-move-template td.sheet-notes-text,
   .sheet-rolltemplate-feature-output .sheet-container table.sheet-feature-template td.sheet-notes-text {
@@ -1781,14 +2317,6 @@ button[type="roll"].sheet-inline-roller {
     width: 65px;
   }
 
-  .sheet-stat-ball-color[type="number"] {
-    font-size: 1.3em
-  }
-
-  .charsheet button[type="roll"].sheet-stat-roller {
-    font-size: 1.3em;
-  }
-
   .sheet-capture-pokemon-skill-m1 {
     align-items: center;
     display: grid;
@@ -1799,15 +2327,6 @@ button[type="roll"].sheet-inline-roller {
     align-items: center;
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
-  }
-
-  .sheet-pokemon-move-info-header {
-    justify-content: normal;
-  }
-
-  .sheet-pokemon-move-info-header input[type="text"] {
-    margin-left: 4px;
-    width: 60%;
   }
 
   .sheet-move-modifiers {

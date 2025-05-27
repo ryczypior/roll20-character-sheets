@@ -298,9 +298,21 @@
       </p>
     </details>
     <p>Click <b>Instructions</b> for detailed instructions.</p>
+    <span>
+      Link will appear in chat:
+      <button
+        style="font-size: 1em;"
+        class="no-dice"
+        type="roll"
+        value="[YouTube Sheet Tutorials](https://www.youtube.com/playlist?list=PLZk7Im2gciP87Imdx6GcVrZT6JAK10zvv)"
+        name="roll_youtube"
+      >
+        YouTube Sheet Tutorials
+      </button>
+    </span>
     <hr />
     <h3>Options</h3>
-    <input type="hidden" name="attr_version" value="1.2.0" />
+    <input type="hidden" name="attr_version" value="1.7.4" />
     <label>Version: <span name="attr_version"></span></label>
     <input type="hidden" name="attr_migrated" value="0" />
     <label>Migrated: <span name="attr_migrated"></span></label>
@@ -321,7 +333,10 @@
       Mode</label
     >
     <label
-      ><input type="checkbox" name=attr_outputusage" value="1" /> Output
+      ><input type="checkbox" name="attr_youtube" value="1" /> Hide YouTube link above tabs</label
+    >
+    <label
+      ><input type="checkbox" name="attr_outputusage" value="1" /> Output
       ISP/PPE/Damage usage to chat</label
     >
     <label
@@ -384,6 +399,14 @@
       Adds IQ bonus to abilities/magic/psionic that use a skill-based
       percentage. Some examples include, but are not limited to, Telemechanics,
       Object Read, Locate, etc.
+    </p>
+    <label
+      ><input type="checkbox" name="attr_opt_add_skill" value="1" /> Skill
+      Rolls: Add roll to skill %.</label
+    >
+    <p>
+      Instead of trying to roll <b>under</b> your skill %, add your roll to your
+      skill % where a success is > 100.
     </p>
     <hr />
     <h3>Import/Export</h3>
